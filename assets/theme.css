@@ -1,0 +1,32 @@
+/* Shared design tokens for the whole site ("כרטיסי זיכרון" concept, palette "שמיים ומשמש").
+   Sky (#B9DCEB) and apricot (#F6C9A8) are fills only; all text, control borders and progress use --fg (#263E50) for AA contrast. */
+:root{
+  --bg:#EAF5FA;          /* page background: very light sky */
+  --surface:#FFF9F2;     /* cards, sheets: warm off-white */
+  --fg:#263E50;          /* text, icons, strong controls: deep blue-gray */
+  --muted:#55697a;       /* secondary text (5.1:1 on --bg) */
+  --line:#d3e4ec; --chip:#d9ecf4; --track:#d3e4ec;
+  --primary:#B9DCEB;     /* flashcard front, selected states */
+  --on-primary:#263E50;
+  --primary-soft:#d9ecf4;
+  --highlight:#F6C9A8;   /* apricot: small accents and the main "remembered" action */
+  --on-highlight:#263E50;
+  --font:"Google Sans",system-ui,sans-serif;   /* running text */
+  --serif:"Fredoka","Google Sans",sans-serif;  /* headings and ideas (name kept for compatibility) */
+  --shadow:none;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1a22; --surface:#16242e; --fg:#e6f1f7; --muted:#9fb4c2; --line:#24394a; --chip:#1d3040; --track:#24394a;
+  --primary-soft:#1d3040; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1a22; --surface:#16242e; --fg:#e6f1f7; --muted:#9fb4c2; --line:#24394a; --chip:#1d3040; --track:#24394a;
+  --primary-soft:#1d3040; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.65}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.bar{height:6px;background:var(--track);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--fg);border-radius:3px;width:0}
+@media (prefers-reduced-motion:no-preference){.bar i{transition:width .3s ease}}
