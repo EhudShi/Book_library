@@ -1,14 +1,14 @@
 /* Shared styles for every book summary page. Tokens come from theme.css.
    Each book sets its own --accent / --accent-soft (used for its labels and quotes). */
 @import url("theme.css");
-:root{--accent:var(--leaf);--accent-soft:var(--leaf-soft);--display:var(--font);--body:var(--font)}
+:root{--accent:var(--fg);--accent-soft:var(--primary-soft);--display:var(--font);--body:var(--font)}
 
 .topnav{direction:rtl;max-width:700px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;
   padding:18px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
 .topnav a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500}
-.topnav a:hover{color:var(--leaf)}
+.topnav a:hover{color:var(--fg)}
 .topnav .pill:empty{display:none}
-.topnav .pill{background:var(--surface);border-radius:999px;padding:3px 12px;font-size:13px;font-weight:700;color:var(--leaf);font-variant-numeric:tabular-nums}
+.topnav .pill{background:var(--surface);border-radius:999px;padding:3px 12px;font-size:13px;font-weight:700;color:var(--fg);font-variant-numeric:tabular-nums}
 
 .wrap{direction:rtl;max-width:700px;margin:0 auto;padding-block:20px 72px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
@@ -16,7 +16,7 @@
 h1,h2,h3{font-family:var(--font);text-wrap:balance;margin:0;line-height:1.25}
 h1{font-family:var(--serif);font-size:clamp(30px,6.5vw,44px);font-weight:700;line-height:1.15}
 h2{font-size:21px;font-weight:700;display:flex;gap:10px;align-items:center}
-h2 .n{flex:none;width:28px;height:28px;border-radius:9px;background:var(--leaf-soft);color:var(--leaf);display:grid;place-items:center;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+h2 .n{flex:none;width:28px;height:28px;border-radius:9px;background:var(--primary-soft);color:var(--fg);display:grid;place-items:center;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
 p{margin:0}
 ul{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px}
 strong{font-weight:700}
@@ -25,7 +25,7 @@ header{display:flex;flex-direction:column;gap:12px}
 .lead{font-size:19px}
 
 section{display:flex;flex-direction:column;gap:12px;padding-top:28px;border-top:1px solid var(--line)}
-.key{font-family:var(--serif);font-size:19px;font-weight:500;line-height:1.5;padding-inline-start:14px;border-inline-start:3px solid var(--leaf)}
+.key{font-family:var(--serif);font-size:19px;font-weight:500;line-height:1.5;padding-inline-start:14px;border-inline-start:3px solid var(--highlight)}
 blockquote{margin:0;padding:4px 16px;border-inline-start:3px solid var(--accent);color:var(--muted)}
 blockquote cite{display:block;font-style:normal;font-size:14px;margin-top:4px}
 
@@ -37,31 +37,31 @@ blockquote cite{display:block;font-style:normal;font-size:14px;margin-top:4px}
 .cards{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 18px;margin-inline:-2px;scrollbar-width:none}
 .cards::-webkit-scrollbar{display:none}
 .fc{flex:0 0 88%;scroll-snap-align:center;background:var(--surface);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:10px;min-height:170px;
-  box-shadow:var(--shadow),0 10px 0 -4px var(--leaf-soft),0 18px 0 -8px var(--track)}
-.fc small{color:var(--leaf);font-weight:700;font-size:13px;font-variant-numeric:tabular-nums}
+  box-shadow:var(--shadow),0 10px 0 -4px var(--primary-soft),0 18px 0 -8px var(--track)}
+.fc small{color:var(--fg);font-weight:700;font-size:13px;font-variant-numeric:tabular-nums}
 .fc .ch{color:var(--muted);font-size:14px;margin-top:-6px}
 .fc .idea{font-family:var(--serif);font-size:21px;font-weight:500;line-height:1.45}
 .fc a{margin-top:auto;font-size:14px;color:var(--muted);text-decoration:none;font-weight:500}
-.fc a:hover{color:var(--leaf)}
+.fc a:hover{color:var(--fg)}
 .dots{display:flex;gap:6px;justify-content:center}
 .dots button{width:8px;height:8px;padding:0;border:0;border-radius:4px;background:var(--track);cursor:pointer}
-.dots button[aria-current="true"]{width:20px;background:var(--leaf)}
+.dots button[aria-current="true"]{width:20px;background:var(--fg)}
 @media (prefers-reduced-motion:no-preference){.cards{scroll-behavior:smooth}.dots button{transition:width .2s ease}}
 @media (min-width:640px){.fc{flex-basis:70%}}
 
 /* Practical steps as a checklist */
-.todo{background:var(--surface);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px;border-top:6px solid var(--sun)}
+.todo{background:var(--surface);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px;border-top:6px solid var(--highlight)}
 .todo h2{font-size:20px}
 .todo ul{list-style:none;padding:0;gap:4px}
 .todo .weeks{display:flex;flex-direction:column;gap:4px}
 .todo .weeks li{background:none;border:0;padding:0}
-.todo .weeks b{color:var(--leaf);font-size:15px;display:block}
+.todo .weeks b{color:var(--fg);font-size:15px;display:block}
 .todo-progress{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
 .todo-progress .bar{flex:1}
 .step{display:flex;gap:12px;align-items:flex-start;padding:10px 8px;border-radius:12px;cursor:pointer}
 .step:hover{background:var(--bg)}
-.step input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;margin:3px 0 0;border:2px solid var(--leaf);border-radius:7px;cursor:pointer;display:grid;place-items:center}
-.step input::after{content:"";width:6px;height:11px;border:solid var(--leaf-ink);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px);opacity:0}
-.step input:checked{background:var(--leaf)}
+.step input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;margin:3px 0 0;border:2px solid var(--fg);border-radius:7px;cursor:pointer;display:grid;place-items:center}
+.step input::after{content:"";width:6px;height:11px;border:solid var(--bg);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px);opacity:0}
+.step input:checked{background:var(--fg)}
 .step input:checked::after{opacity:1}
 .step input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
