@@ -14,7 +14,7 @@
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
   display:flex;flex-direction:column;gap:32px}
 h1,h2,h3{font-family:var(--font);text-wrap:balance;margin:0;line-height:1.25}
-h1{font-family:"Frank Ruhl Libre",serif;font-size:clamp(30px,6.5vw,44px);font-weight:700;line-height:1.15}
+h1{font-family:var(--serif);font-size:clamp(30px,6.5vw,44px);font-weight:700;line-height:1.15}
 h2{font-size:21px;font-weight:700;display:flex;gap:10px;align-items:center}
 h2 .n{flex:none;width:28px;height:28px;border-radius:9px;background:var(--leaf-soft);color:var(--leaf);display:grid;place-items:center;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
 p{margin:0}
@@ -25,7 +25,7 @@ header{display:flex;flex-direction:column;gap:12px}
 .lead{font-size:19px}
 
 section{display:flex;flex-direction:column;gap:12px;padding-top:28px;border-top:1px solid var(--line)}
-.key{font-family:"Frank Ruhl Libre",serif;font-size:19px;font-weight:500;line-height:1.5;padding-inline-start:14px;border-inline-start:3px solid var(--leaf)}
+.key{font-family:var(--serif);font-size:19px;font-weight:500;line-height:1.5;padding-inline-start:14px;border-inline-start:3px solid var(--leaf)}
 blockquote{margin:0;padding:4px 16px;border-inline-start:3px solid var(--accent);color:var(--muted)}
 blockquote cite{display:block;font-style:normal;font-size:14px;margin-top:4px}
 
@@ -40,7 +40,7 @@ blockquote cite{display:block;font-style:normal;font-size:14px;margin-top:4px}
   box-shadow:var(--shadow),0 10px 0 -4px var(--leaf-soft),0 18px 0 -8px var(--track)}
 .fc small{color:var(--leaf);font-weight:700;font-size:13px;font-variant-numeric:tabular-nums}
 .fc .ch{color:var(--muted);font-size:14px;margin-top:-6px}
-.fc .idea{font-family:"Frank Ruhl Libre",serif;font-size:21px;font-weight:500;line-height:1.45}
+.fc .idea{font-family:var(--serif);font-size:21px;font-weight:500;line-height:1.45}
 .fc a{margin-top:auto;font-size:14px;color:var(--muted);text-decoration:none;font-weight:500}
 .fc a:hover{color:var(--leaf)}
 .dots{display:flex;gap:6px;justify-content:center}

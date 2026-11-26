@@ -3,7 +3,7 @@
 :root{
   --bg:#eef2ec; --surface:#ffffff; --fg:#1d2b24; --muted:#5a6a61; --line:#d9e1d8; --chip:#e3e9e1;
   --leaf:#2f7d5b; --leaf-ink:#ffffff; --leaf-soft:#dcebe2; --sun:#f2c94c; --track:#dfe6dd;
-  --font:"Rubik",system-ui,sans-serif;
+  --font:"Rubik",system-ui,sans-serif; --serif:"Frank Ruhl Libre",Georgia,serif;
   --shadow:0 4px 14px rgb(29 43 36 / .08);
   color-scheme:light;
 }
