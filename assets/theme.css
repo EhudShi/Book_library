@@ -11,7 +11,8 @@
   --primary-soft:#d9ecf4;
   --highlight:#F6C9A8;   /* apricot: small accents and the main "remembered" action */
   --on-highlight:#263E50;
-  --font:"Rubik",system-ui,sans-serif; --serif:"Frank Ruhl Libre",Georgia,serif;
+  --font:"Google Sans",system-ui,sans-serif;   /* running text */
+  --serif:"Fredoka","Google Sans",sans-serif;  /* headings and ideas (name kept for compatibility) */
   --shadow:none;
   color-scheme:light;
 }
