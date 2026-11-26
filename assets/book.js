@@ -21,16 +21,17 @@
   if (header && ideas.length){
     var deck = document.createElement('div');
     deck.className = 'deck';
-    deck.innerHTML = '<div class="deck-head"><h2>הרעיונות בכרטיסים</h2><span id="deck-pos"></span></div>' +
+    deck.innerHTML = '<div class="deck-head"><h2>הרעיונות בכרטיסים</h2></div>' +
       '<div class="cards" id="cards" tabindex="0" aria-label="כרטיסי רעיונות, אפשר לגלול הצידה"></div><div class="dots" id="dots"></div>';
     header.after(deck);
-    var cards = deck.querySelector('#cards'), dots = deck.querySelector('#dots'), pos = deck.querySelector('#deck-pos');
+    var cards = deck.querySelector('#cards'), dots = deck.querySelector('#dots');
     ideas.forEach(function(it, i){
       var c = document.createElement('article');
       c.className = 'fc';
-      c.innerHTML = '<small></small><p></p><a></a>';
-      c.querySelector('small').textContent = 'רעיון ' + (i + 1) + ' מתוך ' + ideas.length + (it.title ? ' · ' + it.title : '');
-      c.querySelector('p').textContent = it.text;
+      c.innerHTML = '<small></small><span class="ch"></span><p class="idea"></p><a></a>';
+      c.querySelector('small').textContent = 'רעיון ' + (i + 1) + ' מתוך ' + ideas.length;
+      c.querySelector('.ch').textContent = it.title;
+      c.querySelector('.idea').textContent = it.text;
       var a = c.querySelector('a'); a.href = '#' + it.id; a.textContent = 'לקרוא את הפרק';
       cards.appendChild(c);
       var d = document.createElement('button');
@@ -45,7 +46,6 @@
         if (dd < bestD){ bestD = dd; best = i; }
       });
       Array.prototype.forEach.call(dots.children, function(d, i){ d.setAttribute('aria-current', i === best); });
-      pos.textContent = (best + 1) + ' / ' + ideas.length;
     }
     var t; cards.addEventListener('scroll', function(){ clearTimeout(t); t = setTimeout(mark, 60); });
     mark();

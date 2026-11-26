@@ -6,10 +6,10 @@
 <title>הספרייה שלי</title>
 <meta name="description" content="סיכומי ספרים בעברית">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Rubik:wght@400;500;700;800&display=swap">
 <link rel="stylesheet" href="assets/theme.css">
 <style>
-/* Home: "idea of the day" card on top, then the book list with how much of each book's steps were applied. */
+/* Home: a daily flashcard on top (the one bold element), then a quiet list of books with how much of each book's steps were applied. */
 .wrap{max-width:720px;margin:0 auto;padding-block:32px 72px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
   display:flex;flex-direction:column;gap:28px}
@@ -18,18 +18,28 @@ h1{font-weight:800;font-size:clamp(28px,6vw,40px);line-height:1.1;margin:0}
 .streak{background:var(--surface);border-radius:999px;padding:4px 12px;font-size:14px;font-weight:700;color:var(--leaf);font-variant-numeric:tabular-nums}
 .streak[hidden]{display:none}
 
-.daily{position:relative;background:var(--leaf);color:var(--leaf-ink);border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px;
-  box-shadow:0 10px 0 -4px color-mix(in srgb,var(--leaf) 45%,transparent),0 18px 0 -8px color-mix(in srgb,var(--leaf) 22%,transparent)}
-.daily small{font-size:14px;font-weight:500;opacity:.85}
-.daily p{margin:0;font-size:clamp(20px,4.6vw,26px);font-weight:700;line-height:1.35;text-wrap:pretty;min-height:2.7em}
-.daily .act{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.daily button,.daily a{font:inherit;font-size:14px;font-weight:500;border:0;border-radius:999px;padding:6px 14px;cursor:pointer;text-decoration:none;
-  background:color-mix(in srgb,var(--leaf-ink) 16%,transparent);color:inherit}
-.daily button:hover,.daily a:hover{background:color-mix(in srgb,var(--leaf-ink) 26%,transparent)}
-.daily .done{background:var(--sun);color:#1d2b24}
-.daily .done:hover{background:#f5d56e}
-.daily :focus-visible{outline-color:var(--leaf-ink)}
-.daily a{margin-inline-start:auto}
+/* The one bold element: a flashcard. Front asks, tap flips, back answers. */
+.daily{perspective:1400px}
+.flip{display:grid;position:relative}
+.face{grid-area:1/1;border-radius:22px;padding:24px 22px 20px;display:flex;flex-direction:column;gap:14px;min-height:220px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.front{background:var(--leaf);color:var(--leaf-ink);box-shadow:0 10px 0 -4px color-mix(in srgb,var(--leaf) 45%,transparent),0 18px 0 -8px color-mix(in srgb,var(--leaf) 22%,transparent)}
+.back{background:var(--surface);color:var(--fg);border-top:8px solid var(--sun);transform:rotateY(180deg);box-shadow:0 10px 0 -4px var(--track),0 18px 0 -8px color-mix(in srgb,var(--track) 60%,transparent)}
+.flip.on .front{transform:rotateY(-180deg)}
+.flip.on .back{transform:rotateY(0)}
+@media (prefers-reduced-motion:no-preference){.face{transition:transform .55s cubic-bezier(.2,.7,.2,1)}}
+@media (prefers-reduced-motion:reduce){.flip.on .front{visibility:hidden}.flip:not(.on) .back{visibility:hidden}}
+.serif{font-family:"Frank Ruhl Libre",serif}
+.front .q{margin:0;font-size:clamp(23px,5.4vw,30px);font-weight:700;line-height:1.3;text-wrap:balance}
+.front .src{font-size:15px;opacity:.85}
+.back .idea{margin:0;font-size:clamp(22px,5vw,28px);font-weight:500;line-height:1.4;text-wrap:pretty}
+.back .src{font-size:14px;color:var(--muted)}
+.act{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:auto}
+.act button,.act a{font:inherit;font-size:15px;font-weight:500;border:0;border-radius:999px;padding:8px 16px;cursor:pointer;text-decoration:none;color:inherit;background:var(--chip)}
+.front .act button{background:var(--leaf-ink);color:var(--leaf);font-weight:700}
+.act .yes{background:var(--leaf);color:var(--leaf-ink);font-weight:700}
+.act a{background:none;color:var(--muted);margin-inline-start:auto;padding-inline:4px}
+.act a:hover{color:var(--leaf)}
+.front :focus-visible{outline-color:var(--leaf-ink)}
 
 .tools{display:flex;flex-direction:column;gap:10px}
 .search{font:inherit;font-size:16px;padding:11px 16px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
@@ -37,17 +47,16 @@ h1{font-weight:800;font-size:clamp(28px,6vw,40px);line-height:1.1;margin:0}
 .chip{font:inherit;font-size:14px;font-weight:500;padding:5px 14px;border-radius:999px;border:0;background:var(--chip);color:var(--fg);cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
 
-.list{display:flex;flex-direction:column;gap:10px}
-.list-head{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;color:var(--muted)}
+.list-head{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;color:var(--muted);padding-bottom:4px}
 .list-head b{color:var(--fg);font-weight:700}
-.row{display:grid;grid-template-columns:48px minmax(0,1fr);gap:4px 14px;align-items:center;background:var(--surface);border-radius:18px;padding:14px;text-decoration:none;color:inherit}
-.row:hover{box-shadow:var(--shadow)}
-.ic{grid-row:span 3;align-self:start;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:20px}
-.row h2{margin:0;font-size:18px;font-weight:700;line-height:1.3;text-wrap:balance}
+/* Quiet list: rows split by hairlines, each book marked by its spine color. */
+.row{display:grid;grid-template-columns:6px minmax(0,1fr);gap:2px 14px;padding:14px 0;border-top:1px solid var(--line);text-decoration:none;color:inherit}
+.row:hover h2{color:var(--leaf)}
+.spine{grid-row:span 3;border-radius:3px}
+.row h2{margin:0;font-family:"Frank Ruhl Libre",serif;font-size:21px;font-weight:700;line-height:1.3;text-wrap:balance}
 .row .by{color:var(--muted);font-size:14px}
-.row .by bdi{direction:ltr}
-.row .prog{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:4px}
-.row .prog .bar{flex:1}
+.row .prog{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:6px}
+.row .prog .bar{flex:1;max-width:200px}
 .empty{color:var(--muted);text-align:center;padding:40px 0}
 footer{color:var(--muted);font-size:14px;text-align:center}
 </style>
@@ -59,13 +68,22 @@ footer{color:var(--muted);font-size:14px;text-align:center}
     <span class="streak" id="streak" hidden></span>
   </header>
 
-  <section class="daily" id="daily" aria-live="polite">
-    <small id="d-src">רעיון היום</small>
-    <p id="d-text">...</p>
-    <div class="act">
-      <button type="button" class="done" id="d-done">זוכר</button>
-      <button type="button" id="d-next">עוד רעיון</button>
-      <a id="d-link" href="#">לסיכום המלא</a>
+  <section class="daily" aria-label="כרטיס הזיכרון של היום">
+    <div class="flip" id="flip">
+      <div class="face front" id="front">
+        <p class="q serif" id="d-q">...</p>
+        <span class="src" id="d-book"></span>
+        <div class="act"><button type="button" id="d-flip">לגלות את התשובה</button></div>
+      </div>
+      <div class="face back" id="back" aria-live="polite">
+        <p class="idea serif" id="d-text"></p>
+        <span class="src" id="d-book2"></span>
+        <div class="act">
+          <button type="button" class="yes" id="d-done">זכרתי</button>
+          <button type="button" id="d-next">עוד לא</button>
+          <a id="d-link" href="#">לפרק המלא</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -74,9 +92,9 @@ footer{color:var(--muted);font-size:14px;text-align:center}
     <div class="chips" id="chips" role="group" aria-label="סינון לפי נושא"></div>
   </div>
 
-  <div class="list">
+  <div>
     <div class="list-head"><b>הספרים שלי</b><span id="count"></span></div>
-    <div class="list" id="grid"></div>
+    <div id="grid"></div>
   </div>
   <footer>נבנה עם Claude</footer>
 </div>
@@ -97,39 +115,53 @@ footer{color:var(--muted);font-size:14px;text-align:center}
   if (st.last !== today){ st.n = st.last === today - 1 ? st.n + 1 : 1; st.last = today; store.set('lib:streak', st); }
   if (st.n >= 2){ var s = document.getElementById('streak'); s.textContent = st.n + ' ימים ברצף'; s.hidden = false; }
 
-  // ---------- Idea of the day: read the .key lines from one book page at a time ----------
+  // ---------- Daily flashcard: questions come from the chapters of one book page at a time ----------
   var cache = {}, remembered = store.get('lib:remembered') || {};
   var bi = books.length ? today % books.length : 0, ii = today, tries = 0;
-  var dSrc = document.getElementById('d-src'), dText = document.getElementById('d-text'), dLink = document.getElementById('d-link');
+  var flip = document.getElementById('flip'), front = document.getElementById('front'), back = document.getElementById('back');
+  var dQ = document.getElementById('d-q'), dText = document.getElementById('d-text'), dLink = document.getElementById('d-link');
+  var dBook = document.getElementById('d-book'), dBook2 = document.getElementById('d-book2');
 
   function ideasOf(b){
     if (cache[b.slug]) return Promise.resolve(cache[b.slug]);
     return fetch('books/' + b.slug + '.html').then(function(r){ return r.text(); }).then(function(html){
-      var doc = new DOMParser().parseFromString(html, 'text/html');
-      var list = Array.prototype.map.call(doc.querySelectorAll('.key'), function(k){ return k.textContent.trim(); });
-      return cache[b.slug] = list.length ? list : [b.blurb];
-    }).catch(function(){ return cache[b.slug] = [b.blurb]; });
+      var doc = new DOMParser().parseFromString(html, 'text/html'), list = [];
+      Array.prototype.forEach.call(doc.querySelectorAll('.wrap section'), function(sec, si){
+        var h = sec.querySelector('h2'), t = h ? h.textContent.replace(/^\s*\d+\s*/, '').trim() : '';
+        Array.prototype.forEach.call(sec.querySelectorAll('.key'), function(k){ list.push({ text: k.textContent.trim(), chapter: t, id: sec.id || 's' + (si + 1) }); });
+      });
+      return cache[b.slug] = list.length ? list : [{ text: b.blurb, chapter: '', id: '' }];
+    }).catch(function(){ return cache[b.slug] = [{ text: b.blurb, chapter: '', id: '' }]; });
+  }
+  function setFlipped(on){
+    flip.classList.toggle('on', on);
+    front.inert = on; back.inert = !on;
+    if (on) document.getElementById('d-done').focus({ preventScroll: true });
   }
   function show(){
-    if (!books.length){ dText.textContent = 'עוד אין ספרים בספרייה.'; return; }
+    if (!books.length){ dQ.textContent = 'כשיתווסף ספר ראשון, יופיע כאן כרטיס.'; document.getElementById('d-flip').hidden = true; return; }
     var b = books[bi];
     ideasOf(b).then(function(list){
-      var i = ii % list.length, text = list[i];
+      var i = ii % list.length, it = list[i];
       // Skip ideas already marked "remembered", unless everything is remembered.
       if (remembered[b.slug + ':' + i] && tries < 40){ tries++; next(); return; }
       tries = 0;
-      dSrc.textContent = 'רעיון היום · ' + b.title;
-      dText.textContent = text;
-      dLink.href = 'books/' + b.slug + '.html';
+      dQ.textContent = it.chapter ? 'מה הרעיון המרכזי בפרק "' + it.chapter + '"?' : 'במה עוסק הספר?';
+      dBook.textContent = dBook2.textContent = b.title;
+      dText.textContent = it.text;
+      dLink.href = 'books/' + b.slug + '.html' + (it.id ? '#' + it.id : '');
       dText.dataset.k = b.slug + ':' + i;
     });
   }
   function next(){ bi = (bi + 1) % books.length; if (bi === today % books.length) ii++; show(); }
-  document.getElementById('d-next').onclick = function(){ tries = 0; next(); };
+  function advance(){ setFlipped(false); tries = 0; setTimeout(next, matchMedia('(prefers-reduced-motion:reduce)').matches ? 0 : 280); }
+  document.getElementById('d-flip').onclick = function(){ setFlipped(true); };
+  document.getElementById('d-next').onclick = advance;
   document.getElementById('d-done').onclick = function(){
     if (dText.dataset.k){ remembered[dText.dataset.k] = today; store.set('lib:remembered', remembered); }
-    tries = 0; next();
+    advance();
   };
+  setFlipped(false);
   show();
 
   // ---------- Book list with search, topic filter and applied-steps progress ----------
@@ -157,9 +189,9 @@ footer{color:var(--muted);font-size:14px;text-align:center}
       var pct = p && p.total ? Math.round(100 * p.done / p.total) : 0;
       var label = p && p.total ? (p.done === p.total ? 'הכול יושם' : p.done + ' מתוך ' + p.total + ' צעדים') : 'עוד לא התחלת';
       return '<a class="row" href="books/' + esc(b.slug) + '.html">' +
-        '<span class="ic" style="background:' + esc(b.color) + '" aria-hidden="true">' + esc((b.title || '?').charAt(0)) + '</span>' +
+        '<span class="spine" style="background:' + esc(b.color) + '" aria-hidden="true"></span>' +
         '<h2>' + esc(b.title) + '</h2>' +
-        '<span class="by">' + esc(b.category) + ' · ' + esc(b.author) + '</span>' +
+        '<span class="by">' + esc(b.author) + '</span>' +
         '<span class="prog"><span class="bar"><i style="width:' + pct + '%"></i></span>' + label + '</span>' +
         '</a>';
     }).join('') : '<div class="empty">לא נמצאו ספרים</div>';
